@@ -1,0 +1,7 @@
+- users should be able to login
+- users should be able to sign up
+- users should be able to post
+- users should be able to comment on a post
+- users should be able to like a post
+- system should push notification
+- system should be available 7/24 with less than 1% down
