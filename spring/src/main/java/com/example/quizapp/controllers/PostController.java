@@ -1,6 +1,8 @@
 package com.example.quizapp.controllers;
 
 import com.example.quizapp.entities.Post;
+import com.example.quizapp.requests.PostCreateRequest;
+import com.example.quizapp.requests.PostUpdateRequest;
 import com.example.quizapp.services.PostService;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,12 +25,24 @@ public class PostController {
     }
 
     @PostMapping
-    public Post createPost(@RequestBody Post newPost) {
-        return postService.createPost(newPost);
+    // direkt post objesinden değil, sadece userın IDsine ihtiyaç duyduğumuz için request için gerekli olan bilgilerdeki classımızdan çağırıyopruz
+    public Post createPost(@RequestBody PostCreateRequest newPostRequest) {
+        return postService.createPost(newPostRequest);
     }
 
     @GetMapping("/{postId}")
     public Post getPost(@PathVariable Long postId) {
         return postService.getPost(postId);
+    }
+
+    @PutMapping("/{postId}")
+    // we want to update only specific places, not everything about the post. so we are calling a request object for that
+    public Post updatePost(@PathVariable Long postId, @RequestBody PostUpdateRequest updatePost) {
+        return postService.updatePost(postId, updatePost);
+    }
+
+    @DeleteMapping("/{postId}")
+    public void deletePost(@PathVariable Long postId) {
+        postService.deletePost(postId);
     }
 }
