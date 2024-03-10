@@ -22,11 +22,12 @@ public class Post {
     @JoinColumn(name = "user_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
+    //I dont need all of the user's infos. I need only ID of the user. So we should create request package for that
     User user;
 
     String title;
     @Lob
     // hibernate will recognise string as text from mysql. otherwise it could be varchar255
-    @Column(columnDefinition = "TEXT")
+    @Column(columnDefinition = "text")
     String text;
 }
