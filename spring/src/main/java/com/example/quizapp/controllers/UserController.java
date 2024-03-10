@@ -14,6 +14,7 @@ public class UserController {
 
     // repodan modelimizi alıp query, işlem yapabilmemiz lazım
     // setter ya da constructor injection yapmamız lazım ki spring otomatik bulsun istediğimiz üzerinde işlem yapalım. Burada contstructor kullandıum
+    //bunu bu şekilde yapınca çok kod oluyor ve buraya yazmak zorunda kalıyoruz, service layer ekleyip kodları başka bir katmanda yazmalı. business logic
     private final UserRepository userRepository;
 
     public UserController(UserRepository userRepository) {
