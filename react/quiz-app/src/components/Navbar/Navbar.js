@@ -6,7 +6,6 @@ function Navbar() {
     let userId = 8;
     return (
         <div>
-            {/*<nav>*/}
             <ul>
                 <li>
                     <Link to="/">Home</Link>
@@ -15,9 +14,8 @@ function Navbar() {
                     <Link to={{pathname: '/users/' + userId}}>User</Link>
                 </li>
             </ul>
-            {/*</nav>*/}
         </div>
-    )
+    );
 }
 
 export default Navbar;
