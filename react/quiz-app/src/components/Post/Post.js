@@ -8,7 +8,7 @@ function Post() {
     const [postList, setPostList] = useState([]);
 
     useEffect(() => {
-        fetch("https://localhost:8080/posts")
+        fetch("/posts")
             .then(r => r.json())
             .then((result) => {
                 setIsLoaded(true);
