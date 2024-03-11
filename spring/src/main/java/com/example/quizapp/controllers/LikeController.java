@@ -1,6 +1,7 @@
 package com.example.quizapp.controllers;
 
 import com.example.quizapp.entities.Like;
+import com.example.quizapp.requests.LikeCreateRequest;
 import com.example.quizapp.responses.LikeResponse;
 import com.example.quizapp.services.LikeService;
 import org.springframework.web.bind.annotation.*;

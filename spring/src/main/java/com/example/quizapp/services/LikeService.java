@@ -33,11 +33,11 @@ public class LikeService {
         } else if (postId.isPresent()) {
             list = likeRepository.findByPostId(postId.get());
         } else list = likeRepository.findAll();
-        return list.stream().map(like -> new LikeResponse(like)).collect(Collectors.toList());
+        return list.stream().map(LikeResponse::new).collect(Collectors.toList());
     }
 
-    public Like getOneLikeById(Long LikeId) {
-        return likeRepository.findById(LikeId).orElse(null);
+    public Like getOneLikeById(Long likeId) {
+        return likeRepository.findById(likeId).orElse(null);
     }
 
     public Like createOneLike(LikeCreateRequest request) {
