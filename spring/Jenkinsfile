@@ -1,0 +1,24 @@
+pipeline {
+    environment {
+        QODANA_TOKEN = credentials('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJvcmdhbml6YXRpb24iOiJwOTJEbyIsInByb2plY3QiOiJwMGFtUSIsInRva2VuIjoiQWxCa1YifQ.NGCDCcZzRNdI8HXbrWx1ck2aaebQModwSye9yqAyEF0')
+    }
+    agent {
+        docker {
+            args '''
+                -v "${WORKSPACE}":/data/project
+                --entrypoint=""
+                '''
+            image 'jetbrains/qodana-jvm'
+        }
+    }
+    stages {
+        stage('Qodana') {
+            when {
+                branch 'master'
+            }
+            steps {
+                sh '''qodana'''
+            }
+        }
+    }
+}
