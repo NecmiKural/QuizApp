@@ -31,7 +31,7 @@ function Home() {
                 Home
                 {
                     postList.map(post => (
-                        <Post title={post.title} text={post.text} />
+                        <Post title={post.title} text={post.text}/>
 
                     ))
                 }
