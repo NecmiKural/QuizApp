@@ -11,6 +11,7 @@ import Typography from '@mui/material/Typography';
 import { red } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import CommentIcon from '@mui/icons-material/Comment';
+import { Link } from "react-router-dom";
 
 const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
@@ -25,11 +26,17 @@ const ExpandMore = styled((props) => {
 }));
 
 export default function Post(props) {
+    const { title, text, userName, userId } = props;
+
     const [expanded, setExpanded] = React.useState(false);
+    const [liked, setLiked] = React.useState(false);
+
     const handleExpandClick = () => {
         setExpanded(!expanded);
     };
-    const { title, text } = props;
+    const handleLike = () => {
+        setLiked(!liked);
+    };
 
     return (
         <div>
@@ -37,11 +44,12 @@ export default function Post(props) {
                 <CardHeader
                     sx={{ textAlign: "left" }}
                     avatar={
-                        <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                            R
-                        </Avatar>
+                        <Link className="link" to={{ pathname: '/users/' + userId }}>
+                            <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+                                {userName.charAt(0).toUpperCase()}
+                            </Avatar>
+                        </Link>
                     }
-
                     title={title}
                 />
                 <CardContent>
@@ -50,8 +58,10 @@ export default function Post(props) {
                     </Typography>
                 </CardContent>
                 <CardActions disableSpacing>
-                    <IconButton aria-label="add to favorites">
-                        <FavoriteIcon />
+                    <IconButton
+                        onClick={handleLike}
+                        aria-label="add to favorites">
+                        <FavoriteIcon style={liked ? { color: "red" } : null} />
                     </IconButton>
                     <ExpandMore
                         expand={expanded}

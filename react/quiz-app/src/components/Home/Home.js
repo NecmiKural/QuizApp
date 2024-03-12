@@ -40,8 +40,8 @@ function Home() {
                 }}>
                     {
                         postList.map(post => (
-                            <Post title={post.title} text={post.text} />
-
+                            // sending props
+                            <Post userId={post.userId} userName={post.userName} title={post.title} text={post.text} />
                         ))
                     }
                 </Box>
