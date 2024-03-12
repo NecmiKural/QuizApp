@@ -1,10 +1,12 @@
 package com.example.quizapp.services;
 
+import com.example.quizapp.entities.Like;
 import com.example.quizapp.entities.Post;
 import com.example.quizapp.entities.User;
 import com.example.quizapp.repos.PostRepository;
 import com.example.quizapp.requests.PostCreateRequest;
 import com.example.quizapp.requests.PostUpdateRequest;
+import com.example.quizapp.responses.LikeResponse;
 import com.example.quizapp.responses.PostResponse;
 
 import org.springframework.stereotype.Service;
@@ -17,6 +19,7 @@ import java.util.stream.Collectors;
 public class PostService {
 
     private final PostRepository postRepository;
+    private LikeService likeService;
     private final UserService userService;
 
     public PostService(PostRepository postRepository, UserService userService) {
@@ -24,14 +27,26 @@ public class PostService {
         this.userService = userService;
     }
 
+    // calling with setter bcs in constructor there is a circular dependency,
+    // calling eachother
+    public void setLikeService(LikeService likeService) {
+        this.likeService = likeService;
+    }
+
     public List<PostResponse> getPosts(Optional<Long> userId) {
-        // gelen responsu post olarak almalıyız. aşağıda onun atamasını yapıyoruz. Ardınran return ederken responsumuzun constructıryla dönüyoruz
+        // gelen responsu post olarak almalıyız. aşağıda onun atamasını yapıyoruz.
+        // Ardınran return ederken responsumuzun constructıryla dönüyoruz
         List<Post> list;
         if (userId.isPresent())
             list = postRepository.findByUserId(userId.get());
         list = postRepository.findAll();
 
-        return list.stream().map(p -> new PostResponse(p)).collect(Collectors.toList());
+        // direkt sql sorgusu atılabilir database'e
+
+        return list.stream().map(p -> {
+            List<LikeResponse> likes = likeService.getAllLikesWithParam(null, Optional.of(p.getId()));
+            return new PostResponse(p, likes);
+        }).collect(Collectors.toList());
 
     }
 
