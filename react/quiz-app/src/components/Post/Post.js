@@ -31,14 +31,14 @@ export default function Post(props) {
     const { title, text, userName, userId, postId, likes } = props;
 
     const [expanded, setExpanded] = React.useState(false);
-    const [liked, setLiked] = React.useState(false);
     const [error, setError] = React.useState(null);
     const [isLoaded, setIsLoaded] = React.useState(false);
     const [commentList, setCommentList] = React.useState([]);
+    const [isLiked, setIsLiked] = React.useState(false);
     // bu ilk kez mi reload ediliyor yoksa birisi commentleri açtı mı onu haber verecek
     const isInitialMount = React.useRef(true);
 
-    const likeCount = likes.length;
+    const [likeCount, setLikeCount] = React.useState(likes.length);
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
@@ -46,7 +46,11 @@ export default function Post(props) {
         console.log(commentList);
     };
     const handleLike = () => {
-        setLiked(!liked);
+        setIsLiked(!isLiked);
+        if (!isLiked)
+            setLikeCount(likeCount + 1)
+        else
+            setLikeCount(likeCount - 1)
     };
 
     const refreshComments = () => {
@@ -64,6 +68,15 @@ export default function Post(props) {
             )
     }
 
+    
+
+    const checkLikes = () => {
+        var likeControl = likes.find((like => like.userId == userId))
+        if (likeControl != null) {
+            setIsLiked(true);
+        }
+    }
+
     React.useEffect(() => {
         if (isInitialMount.current) {
             isInitialMount.current = false;
@@ -71,6 +84,8 @@ export default function Post(props) {
             refreshComments();
         }
     }, [commentList])
+
+    React.useEffect(() => { checkLikes() }, [])
 
     return (
         <div>
@@ -95,9 +110,9 @@ export default function Post(props) {
                     <IconButton
                         onClick={handleLike}
                         aria-label="add to favorites">
-                        <FavoriteIcon style={liked ? { color: "red" } : null} />
-                        {likeCount}
+                        <FavoriteIcon style={isLiked ? { color: "red" } : null} />
                     </IconButton>
+                    {likeCount}
                     <ExpandMore
                         expand={expanded}
                         onClick={handleExpandClick}
