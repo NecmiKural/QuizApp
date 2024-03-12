@@ -40,6 +40,7 @@ export default function Post(props) {
     const handleExpandClick = () => {
         setExpanded(!expanded);
         refreshComments();
+        console.log(commentList);
     };
     const handleLike = () => {
         setLiked(!liked);
@@ -47,14 +48,16 @@ export default function Post(props) {
 
     const refreshComments = () => {
         fetch("/comments?postId=" + postId)
-            .then(r => r.json())
-            .then((result) => {
-                setIsLoaded(true);
-                setCommentList(result)
-            }, (error) => {
-                setIsLoaded(true);
-                setError(error);
-            }
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    setIsLoaded(true);
+                    setCommentList(result)
+                },
+                (error) => {
+                    setIsLoaded(true);
+                    setError(error);
+                }
             )
     }
 
@@ -102,17 +105,13 @@ export default function Post(props) {
                 </CardActions>
                 <Collapse in={expanded} timeout="auto" unmount OnExit>
                     <Container fixed>
-                        {/* {
+                        {
                             error ? "error" :
                                 isLoaded ? commentList.map(comment => (
                                     // <Comment key={comment.commentId} text={comment.text} userId={comment.userId} userName={comment.userName} />
-                                    <Comment text={comment.text} userId={1} userName={"user"} />
+                                    <Comment text={comment.text} userId={"1"} userName={"user"} />
                                 )) : "loading"
-                        } */}
-                        {error ? "error" :
-                            isLoaded ? commentList.map(comment => (
-                                <Comment userId={comment.userId} userName={comment.userName} text={comment.text}></Comment>
-                            )) : "Loading"}
+                        }
                     </Container>
                 </Collapse>
             </Card>

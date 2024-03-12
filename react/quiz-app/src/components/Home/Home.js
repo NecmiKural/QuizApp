@@ -45,7 +45,7 @@ function Home() {
                 {
                     postList.map(post => (
                         // sending props
-                        <Post postId={post.postId} userId={post.userId} userName={post.userName}
+                        <Post postId={post.id} userId={post.userId} userName={post.userName}
                             title={post.title} text={post.text} />
                     ))
                 }

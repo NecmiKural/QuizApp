@@ -24,7 +24,7 @@ const useStyles = styled((theme) => ({
 }));
 
 function Comment(props) {
-    const [text, userId, userName] = props;
+    const {text, userId, userName} = props;
     const classes = useStyles();
 
     return (
