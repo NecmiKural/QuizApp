@@ -12,7 +12,7 @@ export default function PostForm(props) {
     const { userName, userId } = props;
 
     const [text, setText] = React.useState('');
-    const { title, setTitle } = React.useState('');
+    const [title, setTitle] = React.useState('');
 
     const savePost = () => {
         // axios could be used
