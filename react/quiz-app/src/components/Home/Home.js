@@ -3,22 +3,8 @@ import Post from "../Post/Post";
 import './Home.scss';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
-import { styled } from '@mui/material/styles';
-
-const useStyles = styled((theme) => ({
-    container: {
-        display: "flex",
-        flexWrap: "wrap",
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: "#cfe8fc",
-        height: "100vh"
-    }
-}));
 
 function Home() {
-
-    const classes = useStyles();
 
     // the states we need. we will initialize here and then use in forward
     const [error, setError] = useState(null);
@@ -43,8 +29,15 @@ function Home() {
         return <div>Loading...</div>;
     } else {
         return (
-            <Container fixed className={classes.container} maxWidth="sm">
-                <Box fixed className={classes.container} sx={{ bgcolor: '#cfe8fc', height: '100vh',  width: 1000 }}>
+            <Container width="sm">
+                <Box sx={{
+                    display: "flex",
+                    flexWrap: "wrap",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    backgroundColor: "#cfe8fc",
+                    height: "100vh"
+                }}>
                     {
                         postList.map(post => (
                             <Post title={post.title} text={post.text} />
