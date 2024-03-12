@@ -13,6 +13,7 @@ import CommentIcon from '@mui/icons-material/Comment';
 import { Link } from "react-router-dom";
 import { Container } from '@mui/material';
 import Comment from '../Comment/Comment';
+import CommentForm from '../Comment/CommentForm';
 
 const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
@@ -112,6 +113,7 @@ export default function Post(props) {
                                     <Comment text={comment.text} userId={"1"} userName={"user"} />
                                 )) : "loading"
                         }
+                        <CommentForm postId={postId} userId={"1"} userName={"user"}></CommentForm>
                     </Container>
                 </Collapse>
             </Card>
