@@ -80,8 +80,6 @@ export default function Post(props) {
 
     const deleteLike = () => {
         fetch("/likes/" + likeId, { method: "DELETE" })
-        //ma function is void, it does not return anything so this can be problem
-            .then((res) => res.json())
             .catch((err) => console.log("error", err))
     }
 
