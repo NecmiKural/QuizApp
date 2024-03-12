@@ -13,6 +13,7 @@ export default function PostForm(props) {
 
     const [text, setText] = React.useState('');
     const [title, setTitle] = React.useState('');
+    const [isSent, setIsSent] = React.useState(false);
 
     const savePost = () => {
         // axios could be used
@@ -34,15 +35,20 @@ export default function PostForm(props) {
 
     const handleSubmit = () => {
         savePost();
+        setIsSent(true);
+        setTitle("");
+        setText("");
         refreshPosts();
     }
 
     const handleTitle = (title) => {
         setTitle(title);
+        setIsSent(false);
     }
 
     const handleText = (text) => {
         setText(text);
+        setIsSent(false);
     }
 
     return (
@@ -63,6 +69,7 @@ export default function PostForm(props) {
                         placeholder='title'
                         inputProps={{ maxLength: 25 }}
                         fullWidth
+                        value={title}
                         onChange={(input) => handleTitle(input.target.value)}
                     >
                     </OutlinedInput>}
@@ -75,6 +82,7 @@ export default function PostForm(props) {
                             placeholder='text'
                             inputProps={{ maxLength: 250 }}
                             fullWidth
+                            value={text}
                             onChange={(input) => handleText(input.target.value)}
                             endAdornment={
                                 <InputAdornment position='end'>
