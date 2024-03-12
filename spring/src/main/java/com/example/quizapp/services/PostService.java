@@ -9,6 +9,7 @@ import com.example.quizapp.requests.PostUpdateRequest;
 import com.example.quizapp.responses.LikeResponse;
 import com.example.quizapp.responses.PostResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,6 +30,7 @@ public class PostService {
 
     // calling with setter bcs in constructor there is a circular dependency,
     // calling eachother
+    @Autowired
     public void setLikeService(LikeService likeService) {
         this.likeService = likeService;
     }
@@ -44,7 +46,8 @@ public class PostService {
         // direkt sql sorgusu atılabilir database'e
 
         return list.stream().map(p -> {
-            List<LikeResponse> likes = likeService.getAllLikesWithParam(Optional.ofNullable(null), Optional.of(p.getId()));
+            List<LikeResponse> likes = likeService.getAllLikesWithParam(Optional.ofNullable(null),
+                    Optional.of(p.getId()));
             return new PostResponse(p, likes);
         }).collect(Collectors.toList());
 
