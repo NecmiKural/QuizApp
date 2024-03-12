@@ -28,7 +28,7 @@ const ExpandMore = styled((props) => {
 }));
 
 export default function Post(props) {
-    const { title, text, userName, userId, postId } = props;
+    const { title, text, userName, userId, postId, likes } = props;
 
     const [expanded, setExpanded] = React.useState(false);
     const [liked, setLiked] = React.useState(false);
@@ -37,6 +37,8 @@ export default function Post(props) {
     const [commentList, setCommentList] = React.useState([]);
     // bu ilk kez mi reload ediliyor yoksa birisi commentleri açtı mı onu haber verecek
     const isInitialMount = React.useRef(true);
+
+    const likeCount = likes.length;
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
@@ -94,6 +96,7 @@ export default function Post(props) {
                         onClick={handleLike}
                         aria-label="add to favorites">
                         <FavoriteIcon style={liked ? { color: "red" } : null} />
+                        {likeCount}
                     </IconButton>
                     <ExpandMore
                         expand={expanded}
