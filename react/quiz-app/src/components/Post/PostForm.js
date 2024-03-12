@@ -9,7 +9,7 @@ import { Button, InputAdornment, OutlinedInput } from '@mui/material';
 
 
 export default function PostForm(props) {
-    const { userName, userId } = props;
+    const { userName, userId, refreshPosts } = props;
 
     const [text, setText] = React.useState('');
     const [title, setTitle] = React.useState('');
@@ -34,6 +34,7 @@ export default function PostForm(props) {
 
     const handleSubmit = () => {
         savePost();
+        refreshPosts();
     }
 
     const handleTitle = (title) => {
