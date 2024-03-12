@@ -1,4 +1,3 @@
-import './Post.scss';
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
@@ -34,8 +33,8 @@ export default function Post(props) {
     const { title, text } = props;
 
     return (
-        <div className='postContainer'>
-            <Card sx={{ maxWidth: 345 }}>
+        <div>
+            <Card sx={{ maxWidth: 800 }}>
                 <CardHeader
                     avatar={
                         <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">

@@ -13,12 +13,22 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { Link } from "react-router-dom";
+import './Navbar.scss';
+
+// const useStyles = styled((theme) => ({
+//     link: {
+//         textDecoration: "none",
+//         boxShadow: "none",
+//         color: "white",
+//     },
+// }));
 
 // şimdilik statik kalsın
 let userId = 8;
 
-const pages = [<Link to="/">Home</Link>, 'Blog'];
-const settings = [<Link to={{ pathname: '/users/' + userId }}>Profile</Link>, 'Account', 'Dashboard', 'Logout'];
+const pages = [<Link className="link" to="/">Home</Link>, 'Blog'];
+const settings = [<Link className="link" to={{ pathname: '/users/' + userId }}>Profile</Link>, 'Account', 'Dashboard', 'Logout'];
+// const settings = [<Link className={useStyles().link} to={{ pathname: '/users/' + userId }}>Profile</Link>, 'Account', 'Dashboard', 'Logout'];
 
 function Navbar() {
 
