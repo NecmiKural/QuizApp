@@ -5,10 +5,13 @@ import com.example.quizapp.entities.User;
 import com.example.quizapp.repos.PostRepository;
 import com.example.quizapp.requests.PostCreateRequest;
 import com.example.quizapp.requests.PostUpdateRequest;
+import com.example.quizapp.responses.PostResponse;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class PostService {
@@ -21,9 +24,14 @@ public class PostService {
         this.userService = userService;
     }
 
-    public List<Post> getPosts(Optional<Long> userId) {
-        if (userId.isPresent()) return postRepository.findByUserId(userId.get());
-        return postRepository.findAll();
+    public List<PostResponse> getPosts(Optional<Long> userId) {
+        // gelen responsu post olarak almalıyız. aşağıda onun atamasını yapıyoruz. Ardınran return ederken responsumuzun constructıryla dönüyoruz
+        List<Post> list;
+        if (userId.isPresent())
+            list = postRepository.findByUserId(userId.get());
+        list = postRepository.findAll();
+
+        return list.stream().map(p -> new PostResponse(p)).collect(Collectors.toList());
 
     }
 
@@ -35,7 +43,8 @@ public class PostService {
     public Post createPost(PostCreateRequest newPostRequest) {
         // kullanıcı yoksa post oluşturamaz
         User user = userService.getOneUserById(newPostRequest.getUserId());
-        if (user == null) return null;
+        if (user == null)
+            return null;
         Post toSave = new Post();
         toSave.setId(newPostRequest.getId());
         toSave.setText(newPostRequest.getText());

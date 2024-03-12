@@ -1,12 +1,10 @@
 package com.example.quizapp.controllers;
 
 import com.example.quizapp.entities.User;
-import com.example.quizapp.repos.UserRepository;
 import com.example.quizapp.services.UserService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 //usersla alakalı tüm pathler buraya girecek genel olarak
