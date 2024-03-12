@@ -11,6 +11,39 @@ import { Button, InputAdornment, OutlinedInput } from '@mui/material';
 export default function PostForm(props) {
     const { userName, userId } = props;
 
+    const [text, setText] = React.useState('');
+    const { title, setTitle } = React.useState('');
+
+    const savePost = () => {
+        // axios could be used
+        // sending post to backend to save database
+        fetch("/posts", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                title: title,
+                userId: userId,
+                text: text
+            }),
+        })
+            .then((res) => res.json())
+            .catch((err) => console.log("error", err))
+    }
+
+    const handleSubmit = () => {
+        savePost();
+    }
+
+    const handleTitle = (title) => {
+        setTitle(title);
+    }
+
+    const handleText = (text) => {
+        setText(text);
+    }
+
     return (
         <div>
             <Card sx={{ width: 800, margin: 5 }}>
@@ -29,6 +62,7 @@ export default function PostForm(props) {
                         placeholder='title'
                         inputProps={{ maxLength: 25 }}
                         fullWidth
+                        onChange={(input) => handleTitle(input.target.value)}
                     >
                     </OutlinedInput>}
                 />
@@ -40,6 +74,7 @@ export default function PostForm(props) {
                             placeholder='text'
                             inputProps={{ maxLength: 250 }}
                             fullWidth
+                            onChange={(input) => handleText(input.target.value)}
                             endAdornment={
                                 <InputAdornment position='end'>
                                     <Button
@@ -47,12 +82,12 @@ export default function PostForm(props) {
                                         style={{
                                             background: "linear-gradient(45deg, #2196F3, 30%, #21CBF3 90%)",
                                             color: 'white'
-                                        }}>
+                                        }}
+                                        onClick={handleSubmit}>
                                         Post
                                     </Button>
                                 </InputAdornment>
-                            }
-                        >
+                            }>
                         </OutlinedInput>
                     </Typography>
                 </CardContent>
