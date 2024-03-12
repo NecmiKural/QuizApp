@@ -6,6 +6,8 @@ import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import { Link } from "react-router-dom";
 import { Button, InputAdornment, OutlinedInput } from '@mui/material';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 
 
 export default function PostForm(props) {
@@ -51,8 +53,26 @@ export default function PostForm(props) {
         setIsSent(false);
     }
 
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setIsSent(false);
+    };
+
     return (
         <div>
+            <Snackbar open={isSent} autoHideDuration={600} onClose={handleClose}>
+                <Alert
+                    onClose={handleClose}
+                    severity="success"
+                    variant="filled"
+                    sx={{ width: '100%' }}
+                >
+                    Post sent!
+                </Alert>
+            </Snackbar>
             <Card sx={{ width: 800, margin: 5 }}>
                 <CardHeader
                     sx={{ textAlign: "left" }}
