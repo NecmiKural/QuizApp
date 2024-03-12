@@ -39,13 +39,13 @@ function Home() {
                 justifyContent: "center",
                 alignItems: "center",
                 backgroundColor: "#f0f5ff",
-                height: "100vh",
+                height: "100%",
             }}>
                 <PostForm userId={1} userName={"post.userName"} refreshPosts={refreshPosts} ></PostForm>
                 {
                     postList.map(post => (
                         // sending props
-                        <Post userId={post.userId} userName={post.userName}
+                        <Post postId={post.postId} userId={post.userId} userName={post.userName}
                             title={post.title} text={post.text} />
                     ))
                 }
