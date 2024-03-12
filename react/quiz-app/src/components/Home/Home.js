@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import Post from "../Post/Post";
 import './Home.scss';
 import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
 
 function Home() {
 
@@ -29,26 +28,21 @@ function Home() {
         return <div>Loading...</div>;
     } else {
         return (
-            <Container width="sm">
-                <Box sx={{
-                    display: "flex",
-                    flexWrap: "wrap",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    backgroundColor: "#cfe8fc",
-                    height: "100vh"
-                }}>
-                    {
-                        postList.map(post => (
-                            // sending props
-                            <Post userId={post.userId} userName={post.userName} title={post.title} text={post.text} />
-                        ))
-                    }
-                </Box>
-
-            </Container>
-
-
+            <Box sx={{
+                display: "flex",
+                flexWrap: "wrap",
+                justifyContent: "center",
+                alignItems: "center",
+                backgroundColor: "#f0f5ff",
+                height: "100vh",
+            }}>
+                {
+                    postList.map(post => (
+                        // sending props
+                        <Post userId={post.userId} userName={post.userName} title={post.title} text={post.text} />
+                    ))
+                }
+            </Box>
         );
     }
 }
