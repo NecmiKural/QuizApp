@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Post from "../Post/Post";
 import './Home.scss';
 import Box from '@mui/material/Box';
+import PostForm from '../Post/PostForm';
 
 function Home() {
 
@@ -36,6 +37,7 @@ function Home() {
                 backgroundColor: "#f0f5ff",
                 height: "100vh",
             }}>
+                <PostForm userId={1} userName={"post.userName"} ></PostForm>
                 {
                     postList.map(post => (
                         // sending props

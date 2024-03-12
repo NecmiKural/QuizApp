@@ -8,7 +8,6 @@ import Collapse from '@mui/material/Collapse';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import { red } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import CommentIcon from '@mui/icons-material/Comment';
 import { Link } from "react-router-dom";
@@ -45,7 +44,7 @@ export default function Post(props) {
                     sx={{ textAlign: "left" }}
                     avatar={
                         <Link className="link" to={{ pathname: '/users/' + userId }}>
-                            <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+                            <Avatar sx={{ background: "linear-gradient(45deg, #2196F3, 30%, #21CBF3 90%)" }} aria-label="recipe">
                                 {userName.charAt(0).toUpperCase()}
                             </Avatar>
                         </Link>
