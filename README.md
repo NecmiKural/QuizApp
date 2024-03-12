@@ -1,4 +1,4 @@
-This is a fullstack application for sharing posts, making comments, liking posts. Backend provided with Java Spring Boot and frontend is React.
+This is a fullstack application for sharing posts, making comments, liking posts. Backend provided with Java Spring Boot, frontend is React, database is MySql.
 
 I have used java version 17.
 
