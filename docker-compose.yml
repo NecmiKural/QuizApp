@@ -1,0 +1,33 @@
+version: '3'
+services:
+  mysql:
+    image: mysql:8.0
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: P@ssw0rd
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: quiz_app_password
+      MYSQL_DATABASE: quiz_app
+
+  spring-boot-app:
+      build:
+      #backend
+        context: ./spring
+        dockerfile: Dockerfile
+      ports:
+        - "8080:8080"
+      depends_on:
+        - mysql
+      environment:
+        SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/product
+        SPRING_DATASOURCE_USERNAME: user
+        SPRING_DATASOURCE_PASSWORD: quiz_app_password
+
+  react-app:
+      build:
+      #frontend
+        context: ./react/quiz-app
+        dockerfile: Dockerfile
+      ports:
+        - "3000:80"
